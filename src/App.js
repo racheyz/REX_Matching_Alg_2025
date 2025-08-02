@@ -8,10 +8,12 @@ function App() {
   const [mentees, setMentees] = useState(null);
   const [mentors, setMentors] = useState(null);
   const [results, setResults] = useState(null);
+  const [availableMentorsWithMentees, setavailableMentorsWithMentees] = useState(null);
 
   const handleUpload = () => {
-    const matchingResults = processMatching(mentees, mentors);
-    setResults(matchingResults);
+    const { mentorAssignments, availableMentorsWithMentees } = processMatching(mentees, mentors);
+    setResults(mentorAssignments);
+    setavailableMentorsWithMentees(availableMentorsWithMentees);
   };
 
   return (
@@ -25,7 +27,7 @@ function App() {
       >
         Match
       </button>
-      {results && <MatchingResults results={results} />}
+      {results && availableMentorsWithMentees && <MatchingResults results={results} availableMentorsWithMentees={availableMentorsWithMentees}/>}
     </div>
   );
 }
